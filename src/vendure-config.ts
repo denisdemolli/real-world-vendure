@@ -37,17 +37,16 @@ export const config: VendureConfig = {
     dbConnectionOptions: {
         type: 'mysql',
     	synchronize: false,
-	    logging: false,
+	logging: false,
     	port: 25060,
     	database: 'defaultdb',
     	host: 'db-mysql-fra1-09543-do-user-9960092-0.b.db.ondigitalocean.com',
     	username: 'doadmin',
     	password: '',
- 	    ssl: {
+ 	ssl: {
          rejectUnauthorized : false,
-  	    },
+  	},
         migrations: [getMigrationsPath()],
-        
     },
     paymentOptions: {
         paymentMethodHandlers: [dummyPaymentHandler],
