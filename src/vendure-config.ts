@@ -30,6 +30,7 @@ export const config: VendureConfig = {
         shopApiDebug: true,
     },
     authOptions: {
+        tokenMethod: ['bearer', 'cookie'],
         cookieOptions: {
             secret: 'jysakgzhw6',
         },
