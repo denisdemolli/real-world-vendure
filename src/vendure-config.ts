@@ -57,23 +57,38 @@ export const config: VendureConfig = {
         AssetServerPlugin.init({
             route: 'assets',
             assetUploadDir: path.join(__dirname, '../static/assets'),
+	    assetUrlPrefix: 'https://fitdesk.sk/assets/',
         }),
         DefaultSearchPlugin,
         DefaultJobQueuePlugin,
-        EmailPlugin.init({
+	EmailPlugin.init({
             route: 'mailbox',
-            devMode: true,
+            // devMode: true,
             outputPath: path.join(__dirname, '../static/email/test-emails'),
             handlers: defaultEmailHandlers,
             templatePath: path.join(__dirname, '../static/email/templates'),
             globalTemplateVars: {
                 // The following variables will change depending on your storefront implementation
-                fromAddress: '"example" <noreply@example.com>',
-                verifyEmailAddressUrl: 'http://localhost:8080/verify',
-                passwordResetUrl: 'http://localhost:8080/password-reset',
-                changeEmailAddressUrl: 'http://localhost:8080/verify-email-address-change',
+                fromAddress: 'info@fitdesk.sk',
+                verifyEmailAddressUrl: 'https://shop.fitdesk.sk/account/verify',
+                passwordResetUrl: 'https://shop.fitdesk.sk/account/password-reset',
+                changeEmailAddressUrl: 'https://shop.fitdesk.sk/account/verify-email-address-change',
+            },
+            transport: {
+                type: 'smtp',
+                host: 'smtp.eu.mailgun.org',
+                port: 25,
+                auth: {
+                  user: 'postmaster@fitdesk.sk',
+                  pass: '---',
+                 },
+                logging: true,
+                debug: true,
+                secure: false,
+                transactionLog: true,
             },
         }),
+
         AdminUiPlugin.init({
             route: 'admin',
             port: 3002,
